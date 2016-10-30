@@ -5,8 +5,8 @@ import sys
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 # Connect the socket to the port on the server given by the caller
-server_address = ('tweedle', 10000)
-print >>sys.stderr, 'connecting to %s port %s' % server_address
+server_address = ('tweedle.hallow.local', 10000)
+print >> sys.stderr, 'connecting to %s port %s' % server_address
 sock.connect(server_address)
 
 try:
