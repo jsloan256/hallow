@@ -2,6 +2,7 @@ import socket
 import sys
 import time
 import RPi.GPIO as gpio
+import pygame
 
 ## Create a TCP/IP socket
 #sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -36,7 +37,31 @@ gpio.setup(11, gpio.OUT)
 gpio.setup(12, gpio.OUT)
 
 gpio.output(11, gpio.HIGH)
-gpio.output(12, gpio.HIGH)
+#gpio.output(12, gpio.HIGH)
 time.sleep(1)
 gpio.output(11, gpio.LOW)
-gpio.output(12, gpio.LOW)
+#gpio.output(12, gpio.LOW)
+
+pygame.mixer.init()
+pygame.mixer.music.load("bat.mp3")
+pygame.mixer.music.play()
+while pygame.mixer.music.get_busy() == True:
+  continue
+
+pygame.mixer.init()
+pygame.mixer.music.load("scary.mp3")
+pygame.mixer.music.play()
+while pygame.mixer.music.get_busy() == True:
+  continue
+
+pygame.mixer.init()
+pygame.mixer.music.load("zombie.mp3")
+pygame.mixer.music.play()
+while pygame.mixer.music.get_busy() == True:
+  continue
+
+pygame.mixer.init()
+pygame.mixer.music.load("laugh.mp3")
+pygame.mixer.music.play()
+while pygame.mixer.music.get_busy() == True:
+  continue
