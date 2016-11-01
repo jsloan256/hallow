@@ -4,6 +4,14 @@ import time
 import RPi.GPIO as gpio
 import pygame
 
+def play_audio(fn, times):
+  for i in range(0, times):
+#    pygame.mixer.Sound.set_volume(.5)
+    pygame.mixer.music.load(fn)
+    pygame.mixer.music.play()
+    while pygame.mixer.music.get_busy() == True:
+      continue
+
 ## Create a TCP/IP socket
 #sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 #
@@ -36,32 +44,29 @@ gpio.setup(11, gpio.OUT)
 gpio.setup(11, gpio.OUT)
 gpio.setup(12, gpio.OUT)
 
-gpio.output(11, gpio.HIGH)
-#gpio.output(12, gpio.HIGH)
-time.sleep(1)
+pygame.mixer.init()
+
 gpio.output(11, gpio.LOW)
-#gpio.output(12, gpio.LOW)
+gpio.output(12, gpio.LOW)
 
-pygame.mixer.init()
-pygame.mixer.music.load("bat.mp3")
-pygame.mixer.music.play()
-while pygame.mixer.music.get_busy() == True:
-  continue
+while (1):
 
-pygame.mixer.init()
-pygame.mixer.music.load("scary.mp3")
-pygame.mixer.music.play()
-while pygame.mixer.music.get_busy() == True:
-  continue
+  gpio.output(11, gpio.LOW)
+  gpio.output(12, gpio.LOW)
+  play_audio('zombie.mp3', 1)
+  gpio.output(12, gpio.HIGH)
+  time.sleep(10)
+  gpio.output(12, gpio.LOW)
+  play_audio('scary.mp3', 1)
+  gpio.output(12, gpio.HIGH)
+  time.sleep(3)
+  play_audio('laugh.mp3', 1)
+  time.sleep(3)
+  gpio.output(11, gpio.HIGH)
+  time.sleep(7)
 
-pygame.mixer.init()
-pygame.mixer.music.load("zombie.mp3")
-pygame.mixer.music.play()
-while pygame.mixer.music.get_busy() == True:
-  continue
+#  play_audio('bat.mp3')
+#  play_audio('scary.mp3')
+#  play_audio('zombie.mp3')
+#  play_audio('laugh.mp3')
 
-pygame.mixer.init()
-pygame.mixer.music.load("laugh.mp3")
-pygame.mixer.music.play()
-while pygame.mixer.music.get_busy() == True:
-  continue
